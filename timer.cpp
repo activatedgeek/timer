@@ -1,37 +1,58 @@
 #include "timer.h"
 
-
-Timer::Timer(){}
+Timer::Timer(){
+state = false;
+}
 
 Timer::~Timer(){}
 
 //Time point of the start
 void Timer::start(){
-startPoint = system_clock::now();
+if(state == false){
+	state = true;
+	startPoint = system_clock::now();
+}
+
+else
+	cerr<<"Error: Timer not stopped"<<endl;
+
 }
 
 //Time point of the end of execution
 void Timer::stop(){
-endPoint = system_clock::now();
+if(state==true){
+	endPoint = system_clock::now();
+	state = false;
+}
+
+else
+	cerr<<"Error: Timer never started"<<endl;
 }
 
 //Return elapsed time in given unit
 int Timer::getElapsedTime(timeUnit unit){
-if(unit == SEC)
-  return (int)duration_cast<seconds>(endPoint-startPoint).count();
+if(state == false){
+	if(unit == SEC)
+		return (int)duration_cast<seconds>(endPoint-startPoint).count();
 
-else if(unit == MILLISEC)
-	return (int)duration_cast<milliseconds>(endPoint-startPoint).count();
+	else if(unit == MILLISEC)
+		return (int)duration_cast<milliseconds>(endPoint-startPoint).count();
 
-else if(unit == MICROSEC)
-	return (int)duration_cast<microseconds>(endPoint-startPoint).count();
-
-else
+	else if(unit == MICROSEC)
+		return (int)duration_cast<microseconds>(endPoint-startPoint).count();
+}
+else{
+	cerr<<"Error: Timer still ticking";
 	return 0;
+}
 }
 
 //Print the returned finished date and time using ctime(&end_time)
 time_t Timer::getFinishedTime(){
-time_t end_time = system_clock::to_time_t(endPoint);
-return end_time;
+if(state == false){
+	time_t end_time = system_clock::to_time_t(endPoint);
+	return end_time;
+}
+else
+	return (time_t)NULL;
 }
