@@ -30,7 +30,8 @@ int getElapsedTime(timeUnit unit);
 time_t getFinishedTime();
 
 private:
-//Time point private variables
+//Time point private variables and a flag for timer state
+bool state;
 time_point<system_clock> startPoint, endPoint;
 
 };
