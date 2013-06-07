@@ -13,9 +13,9 @@ if(state == false){
 	startPoint = system_clock::now();
 }
 
-else
-	cerr<<"Error: Timer not stopped"<<endl;
-
+else{
+	//cerr<<"Error: Timer not stopped"<<endl;
+}
 }
 
 //Time point of the end of execution
@@ -25,8 +25,9 @@ if(state==true){
 	state = false;
 }
 
-else
-	cerr<<"Error: Timer never started"<<endl;
+else{
+	//cerr<<"Error: Timer never started"<<endl;
+}
 }
 
 //Return elapsed time in given unit
@@ -41,10 +42,17 @@ if(state == false){
 	else if(unit == MICROSEC)
 		return (int)duration_cast<microseconds>(endPoint-startPoint).count();
 }
+
 else{
-	cerr<<"Error: Timer still ticking";
-	return 0;
+	//cerr<<"Error: Timer still ticking";
+	if(unit == SEC)
+		return (int)duration_cast<seconds>(system_clock::now()-startPoint).count();
+	else if(unit == MILLISEC)
+		return (int)duration_cast<milliseconds>(system_clock::now()-startPoint).count();
+	else if(unit == MICROSEC)
+		return (int)duration_cast<microseconds>(system_clock::now()-startPoint).count();
 }
+
 }
 
 //Print the returned finished date and time using ctime(&end_time)
