@@ -10,3 +10,7 @@ Handled exceptions (where the two conflicting calls to timer are done);
 Removed cerr as it was also taking up some time.
 
 getElapsedTime() method gives elapsed time at any instance, whether arbitrarily during the process or final.
+
+I have also added a php script for further use.
+
+just use <?php include 'timer.php' ?>
