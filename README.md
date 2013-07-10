@@ -1,7 +1,7 @@
 timer
 =====
 
-High Precision Timer Class
+High Precision Timer Class C++/PHP
 
 C++
 ===
